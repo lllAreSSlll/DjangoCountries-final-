@@ -1,0 +1,43 @@
+{% extends 'countries/base.html' %}
+
+{% block content %}
+<br>
+
+<!--Alphabet pagination-->
+<div class="container">
+    <nav>
+        <ul class="pagination">
+            {% for char in alphabet %}
+            <li class="page-item"><a class="page-link" href="/countries/alphabet/{{ char }}">{{ char }}</a></li>
+            {% endfor %}
+        </ul>
+    </nav>
+</div>
+<br>
+
+<!--Countries list-->
+<ol class="list-group list-group-numbered">
+    {% for country in page_object %}
+    <li class="list-group-item"><a href="/country/{{ country.name }}">{{ country.name }}</a></li>
+    {% endfor %}
+</ol>
+
+<!--Pagination-->
+<div class="pagination">
+    <span class="step-links">
+        {% if page_object.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_object.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_object.number }} of {{ page_object.paginator.num_pages }}.
+        </span>
+
+        {% if page_object.has_next %}
+            <a href="?page={{ page_object.next_page_number }}">next</a>
+            <a href="?page={{ page_object.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

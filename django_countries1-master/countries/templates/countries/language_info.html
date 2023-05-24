@@ -1,0 +1,12 @@
+{% extends 'countries/base.html' %}
+
+{% block content %}
+<h1>{{ language }}</h1>
+<ol class="list-group list-group-numbered">
+    {% for country in countries %}
+        <li class="list-group-item">
+            <a href="/country/{{ country.name }}">{{ country.name }}</a>
+        </li>
+    {% endfor %}
+</ol>
+{% endblock %}
